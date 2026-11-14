@@ -1,7 +1,10 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://ch1f7s6lqnar3"]
 
 [ext_resource type="Texture2D" uid="uid://diox07yhyoe2j" path="res://Resources/Textures/wall_texture_brutal.png" id="1_0owp3"]
+[ext_resource type="Texture2D" uid="uid://cr3p3pmpancg1" path="res://Resources/Textures/wall_texture_brutal_normal.png" id="2_xroe4"]
 
 [resource]
+albedo_color = Color(0.8666667, 0.8666667, 0.8666667, 1)
 albedo_texture = ExtResource("1_0owp3")
 normal_enabled = true
+normal_texture = ExtResource("2_xroe4")

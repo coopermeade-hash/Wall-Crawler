@@ -60,8 +60,6 @@ func _ready() -> void:
 	#Place the player, the victims, and the exits.
 	place_player()
 	place_victims(world_gen.maze_cells)
-	for victim in get_tree().get_nodes_in_group("victim"):
-		print(victim.position)
 	
 	#Place exits in each direction.
 	for exit in left_exits:

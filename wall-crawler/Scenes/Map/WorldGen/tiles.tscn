@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://l1vt52sdim47"]
 
+[ext_resource type="Material" uid="uid://ch1f7s6lqnar3" path="res://Resources/Materials/wall_mat.tres" id="1_x52yk"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_g4v7s"]
+material = ExtResource("1_x52yk")
 size = Vector3(2, 2, 2)
 
 [node name="Tiles" type="Node3D" unique_id=315058920]

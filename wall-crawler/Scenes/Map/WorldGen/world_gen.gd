@@ -5,6 +5,10 @@ class_name WorldGen extends Node
 	or messing with it programaticly should be done in grid_map.gd
 """
 
+#Change these to change what a hallway / Wall is represented as.
+const HALLWAY_ID = -1
+const WALL_ID = 0
+
 #The WIDTH, HEIGHT, and LENGTH of the maze. Constants are in caps.
 const WIDTH = 32
 const HEIGHT = 32
@@ -35,7 +39,7 @@ func create_maze(walker_LENGTH = 256, path_count = 32):
 			cells[x].append([])
 			for z in LENGTH:
 				
-				cells[x][y].append(-1)
+				cells[x][y].append(WALL_ID)
 	
 	
 	
@@ -49,7 +53,7 @@ func create_maze(walker_LENGTH = 256, path_count = 32):
 			current_cell = maze_cells.pick_random()
 		
 		#Set the current cell to be part of the maze.
-		cells[current_cell.x][current_cell.y][current_cell.z] = 0
+		cells[current_cell.x][current_cell.y][current_cell.z] = HALLWAY_ID
 		
 		maze_cells.append(current_cell)
 		
@@ -60,7 +64,6 @@ func create_maze(walker_LENGTH = 256, path_count = 32):
 			#Get the surrounding cells
 			var dirs = []
 			for dir in DIRS:
-				print(dir)
 				var test_cell = current_cell + dir * 2
 				
 				#see if digging would put us out of bounds or hit part of the maze.
@@ -80,7 +83,7 @@ func create_maze(walker_LENGTH = 256, path_count = 32):
 			for l in 2:
 				current_cell += selected_dir
 				
-				cells[current_cell.x][current_cell.y][current_cell.z] = 0
+				cells[current_cell.x][current_cell.y][current_cell.z] = HALLWAY_ID
 				
 			maze_cells.append(current_cell)
 	#Return the finished map.

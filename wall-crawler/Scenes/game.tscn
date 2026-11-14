@@ -2,7 +2,7 @@
 
 [ext_resource type="MeshLibrary" uid="uid://dpg8w7ded21p8" path="res://Scenes/Map/WorldGen/tiles.tres" id="1_wrm1d"]
 [ext_resource type="Script" uid="uid://dsaq4bkoily40" path="res://Scenes/Map/grid_map.gd" id="2_3dryh"]
-[ext_resource type="Script" uid="uid://cmejxqhu5y0y6" path="res://Scenes/Player.gd" id="3_wowpa"]
+[ext_resource type="PackedScene" uid="uid://dojt6ir5jfyg6" path="res://Scenes/Player/player.tscn" id="3_wrm1d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_feb5d"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -28,10 +28,4 @@ environment = SubResource("Environment_7jktm")
 mesh_library = ExtResource("1_wrm1d")
 script = ExtResource("2_3dryh")
 
-[node name="Node3D" type="Node3D" parent="." unique_id=442491773]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, 0)
-script = ExtResource("3_wowpa")
-
-[node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=1491092617]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)
-current = true
+[node name="Player" parent="." unique_id=471360206 instance=ExtResource("3_wrm1d")]

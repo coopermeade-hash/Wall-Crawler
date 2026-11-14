@@ -26,3 +26,4 @@ func _physics_process(delta: float) -> void:
 		die()
 	
 	velocity_last_frame = velocity
+	move_and_slide()

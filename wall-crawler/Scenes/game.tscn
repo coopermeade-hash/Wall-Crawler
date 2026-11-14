@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cv8la12224fp2"]
 
 [ext_resource type="Script" uid="uid://cybt1815wncyt" path="res://Scenes/game.gd" id="1_wowpa"]
-[ext_resource type="PackedScene" uid="uid://buu8sxvplnax0" path="res://Scenes/Map/world.tscn" id="2_qxrlw"]
 
 [node name="Game" type="Node" unique_id=107631943]
 script = ExtResource("1_wowpa")
@@ -25,5 +24,3 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
-
-[node name="World" parent="." unique_id=129390705 instance=ExtResource("2_qxrlw")]

@@ -1,5 +1,10 @@
 class_name WorldGen extends Node
 
+"""READ ME:
+	This only applies to generating the map. I feel like populating the map randomly,
+	or messing with it programaticly should be done in grid_map.gd
+"""
+
 #The WIDTH, HEIGHT, and LENGTH of the maze. Constants are in caps.
 const WIDTH = 32
 const HEIGHT = 32

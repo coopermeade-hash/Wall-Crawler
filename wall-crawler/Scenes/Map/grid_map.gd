@@ -60,8 +60,6 @@ func _ready() -> void:
 	#Place the player, the victims, and the exits.
 	place_player()
 	place_victims(world_gen.maze_cells)
-	for victim in get_tree().get_nodes_in_group("victim"):
-		print(victim.position)
 	
 	#Place exits in each direction.
 	for exit in left_exits:
@@ -110,5 +108,8 @@ func place_exit(start : Vector3, direction : Vector3, down_dir = Vector3.DOWN, p
 		#If the pit is just over the edge, or after the pit, create a ledge for us to go on.
 		if l > pit_length + 1 or l == 2:
 			set_cell_item(point + down_dir, 0)
+		
+		if l == pit_length + ledge_length:
+			set_cell_item(point, 1)
 		
 		point += direction

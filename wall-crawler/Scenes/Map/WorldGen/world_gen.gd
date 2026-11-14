@@ -102,7 +102,8 @@ func create_maze(walker_LENGTH = 256, path_count = 64):
 				
 				cells[current_cell.x][current_cell.y][current_cell.z] = HALLWAY_ID
 				
-			maze_cells.append(current_cell)
+			if not maze_cells.has(current_cell):
+				maze_cells.append(current_cell)
 	
 	#Look at each dead end, and see possible path merging candidates.
 	for dead_end in dead_ends:

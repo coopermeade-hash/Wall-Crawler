@@ -109,4 +109,7 @@ func place_exit(start : Vector3, direction : Vector3, down_dir = Vector3.DOWN, p
 		if l > pit_length + 1 or l == 2:
 			set_cell_item(point + down_dir, 0)
 		
+		if l == pit_length + ledge_length:
+			set_cell_item(point, 1)
+		
 		point += direction

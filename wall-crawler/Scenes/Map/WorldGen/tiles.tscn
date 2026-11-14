@@ -9,6 +9,14 @@ size = Vector3(2, 2, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_x52yk"]
 size = Vector3(2, 2, 2)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf5fn"]
+shading_mode = 0
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_g4v7s"]
+material = SubResource("StandardMaterial3D_yf5fn")
+size = Vector2(1.25, 2)
+
 [node name="Tiles" type="Node3D" unique_id=315058920]
 
 [node name="Wall" type="MeshInstance3D" parent="." unique_id=634563246]
@@ -18,3 +26,7 @@ mesh = SubResource("BoxMesh_g4v7s")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D" unique_id=969343557]
 shape = SubResource("BoxShape3D_x52yk")
+
+[node name="Exit" type="MeshInstance3D" parent="." unique_id=17675604]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+mesh = SubResource("QuadMesh_g4v7s")

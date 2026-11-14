@@ -34,19 +34,19 @@ func _ready() -> void:
 	#for each dead end, check if the dead end is at one end of the maze, if it is, add to the exits.
 	for dead_end in world_gen.dead_ends:
 		if dead_end.x == 0:
-			left_exits.append(dead_end)
+			left_exits.append(dead_end + Vector3.ONE)
 		if dead_end.x == world_size.x - 2:
-			right_exits.append(dead_end)
+			right_exits.append(dead_end + Vector3.ONE)
 		
 		if dead_end.y == 0:
-			down_exits.append(dead_end)
+			down_exits.append(dead_end + Vector3.ONE)
 		if dead_end.y == world_size.y - 2:
-			up_exits.append(dead_end)
+			up_exits.append(dead_end + Vector3.ONE)
 		
 		if dead_end.z == 0:
-			forward_exits.append(dead_end)
+			forward_exits.append(dead_end + Vector3.ONE)
 		if dead_end.z == world_size.z - 2:
-			backward_exits.append(dead_end)
+			backward_exits.append(dead_end + Vector3.ONE)
 	
 	#Get a list of all the exits. We could use this to point twoards the nearest when.
 	exits = left_exits + right_exits + down_exits + up_exits + forward_exits + backward_exits
@@ -59,10 +59,21 @@ func _ready() -> void:
 	
 	#Place the player, the victims, and the exits.
 	place_player()
-	place_victims(world_gen.dead_ends)
+	place_victims(world_gen.maze_cells)
 	
-	for l_exit in left_exits:
-		
+	#Place exits in each direction.
+	for exit in left_exits:
+		place_exit(exit, Vector3.LEFT)
+	for exit in right_exits:
+		place_exit(exit, Vector3.RIGHT)
+	for exit in up_exits:
+		place_exit(exit, Vector3.UP)
+	for exit in down_exits:
+		place_exit(exit, Vector3.DOWN)
+	for exit in forward_exits:
+		place_exit(exit, Vector3.FORWARD, Vector3.LEFT)
+	for exit in backward_exits:
+		place_exit(exit, Vector3.BACK)
 
 
 #Place the player in the center of the maze.
@@ -87,10 +98,14 @@ func place_victims(dead_ends : Array ):
 			add_child(new_victim)
 
 #Place an exit at the star point, going in a certain direction
-func place_exits(start : Vector3, direction : Vector3, pit_length := 6, ledge_length = 3):
+func place_exit(start : Vector3, direction : Vector3, down_dir = Vector3.DOWN, pit_length := 6, ledge_length = 3):
 	var point = start
-	for l in pit_length + ledge_length:
-		point += direction
+	#Move forward, digging forward from the exit.
+	for l in pit_length + ledge_length + 1:
+		#Remove walls here to open the exit up
 		set_cell_item(point, -1)
-		if l > pit_length:
-			set_cell_item(point + Vector3.DOWN, 0)
+		#If the pit is just over the edge, or after the pit, create a ledge for us to go on.
+		if l > pit_length + 1 or l == 2:
+			set_cell_item(point + down_dir, 0)
+		
+		point += direction

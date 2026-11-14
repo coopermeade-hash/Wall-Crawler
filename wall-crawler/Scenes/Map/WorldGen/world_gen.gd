@@ -23,7 +23,7 @@ func is_out_of_bounds(point : Vector3):
 	return is_false
 
 var dead_ends = []
-
+var maze_cells = []
 
 func _init(width : int, height : int, length : int, seed = randi()) -> void:
 	seed(seed)
@@ -40,7 +40,8 @@ func create_maze(walker_LENGTH = 256, path_count = 64):
 	var cells = []
 	
 	#Create a empty array that will have where our maze junctions are.
-	var maze_cells = []
+	maze_cells = []
+	dead_ends = []
 	
 	#Create a empty 3D array of cells
 	for x in WIDTH + 1:

@@ -30,7 +30,6 @@ environment = SubResource("Environment_7jktm")
 [node name="GridMap" type="GridMap" parent="World" unique_id=1119345686 groups=["map"]]
 mesh_library = ExtResource("1_wrm1d")
 script = ExtResource("2_3dryh")
-world_size = null
 victim_scene = ExtResource("3_3dryh")
 victim_chance = 1.0
 

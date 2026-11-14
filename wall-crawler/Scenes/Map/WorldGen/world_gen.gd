@@ -25,7 +25,8 @@ func is_out_of_bounds(point : Vector3):
 var dead_ends = []
 
 
-func _init(width : int, height : int, length : int) -> void:
+func _init(width : int, height : int, length : int, seed = randi()) -> void:
+	seed(seed)
 	WIDTH = width
 	HEIGHT = height
 	LENGTH = length
@@ -34,7 +35,7 @@ func _init(width : int, height : int, length : int) -> void:
 #Create a maze. walker_LENGTH is how long each walker will walk if it doesn't hit anything
 #Path count is the number of walkers
 #THe maze works by doing a random walker until it hits itself, then it goes to a random spot in the maze.
-func create_maze(walker_LENGTH = 256, path_count = 32):
+func create_maze(walker_LENGTH = 256, path_count = 64):
 	#Create a empty array, that will eventualy become
 	var cells = []
 	
@@ -42,11 +43,11 @@ func create_maze(walker_LENGTH = 256, path_count = 32):
 	var maze_cells = []
 	
 	#Create a empty 3D array of cells
-	for x in WIDTH:
+	for x in WIDTH + 1:
 		cells.append([])
-		for y in HEIGHT:
+		for y in HEIGHT + 1:
 			cells[x].append([])
-			for z in LENGTH:
+			for z in LENGTH + 1:
 				
 				cells[x][y].append(WALL_ID)
 	
@@ -57,7 +58,7 @@ func create_maze(walker_LENGTH = 256, path_count = 32):
 	for path in path_count:
 		#Make our staring cell the middle of the maze
 		#If we arent the first walker, pick a random cell in the maze to start.
-		var current_cell = Vector3(WIDTH / 2, HEIGHT / 2, LENGTH / 2)
+		var current_cell = Vector3( WIDTH / 2, HEIGHT / 2, LENGTH / 2)
 		if maze_cells.size() > 0:
 			current_cell = maze_cells.pick_random()
 		
@@ -82,7 +83,7 @@ func create_maze(walker_LENGTH = 256, path_count = 32):
 				dirs.append(dir)
 			
 			#if the dirs are empty, die, and start a new walker.
-			if dirs.is_empty():
+			if dirs.is_empty() or i == walker_LENGTH - 1:
 				#We also add the dead end to a list of dead ends
 				dead_ends.append(current_cell)
 				break

@@ -24,6 +24,7 @@ const WAIT_TIME = 0.1
 #This varible makes sure the player doesn't input while a tween is active, putting them offgrid.
 var can_input = true
 
+var ghost_mode = true
 
 #Checks if our 'down' is equal to true down, by comparing the distance.
 func check_if_sticking_to_wall(distance_limit = 0.01):
@@ -95,10 +96,11 @@ func wall_crawl(dir = 1):
 	raycast.target_position = (camera.basis * Vector3.FORWARD).normalized() * 2
 	raycast.force_raycast_update()
 	
-	if not raycast.is_colliding():
-		return
-	if not raycast.get_collider() is GridMap:
-		return
+	if not ghost_mode:
+		if not raycast.is_colliding():
+			return
+		if not raycast.get_collider() is GridMap:
+			return
 	#Now we perform a turn in the x axis.
 	await turn(1, basis.x)
 	
@@ -120,13 +122,15 @@ func try_move(direction : Vector3, length = 2):
 	
 	#If the raycast collides, something is blocking it, and we shouldn't move.
 	#TODO: Make this into a bump animation, where we run into the wall.
-	if raycast.is_colliding():
-		return
-	
-	#TODO: Make this into a stumbble animation, where we almost fall off but catch ourselves. 
-	##NOTE: This makes falling impossible! For now i've removed falling, since we can't do it.
-	if not downcast.is_colliding():
-		return
+	if not ghost_mode:
+		
+		if raycast.is_colliding():
+			return
+		
+		#TODO: Make this into a stumbble animation, where we almost fall off but catch ourselves. 
+		##NOTE: This makes falling impossible! For now i've removed falling, since we can't do it.
+		if not downcast.is_colliding():
+			return
 	
 	#The basis, times the direction so it properly goes to where we are facing, times two so we move a full tile.
 	var basis_dir = (self.basis * direction).normalized() * length
@@ -145,6 +149,7 @@ func try_move(direction : Vector3, length = 2):
 
 
 func try_attack():
+	print(Vector3.FORWARD.rotated(Vector3.UP, rotation.y))
 	raycast.target_position = Vector3.FORWARD * 2
 	raycast.force_raycast_update()
 	

@@ -7,10 +7,12 @@ const head_camera = preload("uid://bpyo24twggm1d")
 var level_to_load : String = "uid://buu8sxvplnax0"
 var first_subviewport : SubViewport = null
 var level_node : Node3D = null
+var player_node : Node3D = null 
 
 func _ready() -> void:
 	_add_new_player_viewport(null)
 	_update_viewport_size() 
+	#connect to split 
 	
 func _add_new_player_viewport(new_head : HeadOfBody ) -> void: 
 	#player should not have camera, it is added to their heads in this function
@@ -32,7 +34,7 @@ func _add_new_player_viewport(new_head : HeadOfBody ) -> void:
 		new_subviewport.add_child(level_node)
 		first_subviewport = new_subviewport
 		level_node.get_tree().get_nodes_in_group("player")[0].get_node("RemoteTransform3D").remote_path = new_camera3d.get_path()
-		 
+		level_node.get_tree().get_first_node_in_group("player_controller").split_body.connect(split)
 	
 func _update_viewport_size() -> void:
 	screen_container.columns = ceil(screen_container.get_child_count() / 2.0) 
@@ -43,3 +45,8 @@ func _update_viewport_size() -> void:
 		#second subviewport splits y, not x 
 		subviewport_node.size.x = game_size.x / screen_container.columns
 		subviewport_node.size.y = game_size.y / ceil(float(screen_container.get_child_count()) / float(screen_container.columns))
+
+func split(body) -> void :
+	print("Splitting body")
+	#var new_head = load("uid://bk4pr0tahweoa") 
+	#new_head.head_id = screen_container.get_child_count()

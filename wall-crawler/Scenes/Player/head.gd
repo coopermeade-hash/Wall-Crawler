@@ -18,6 +18,10 @@ var current_segments : int = 1
 @onready var raycast = $RayCast3D
 @onready var downcast = $Downcast
 @onready var remote_transform_3d: RemoteTransform3D = $RemoteTransform3D
+@onready var body: Node3D = $Body
+
+func _ready() -> void:
+	current_segments = 1 + body.get_child_count()
 	
 #Checks if our 'down' is equal to true down, by comparing the distance.
 func check_if_sticking_to_wall(distance_limit = 0.01):

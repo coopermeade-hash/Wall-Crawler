@@ -6,14 +6,16 @@ extends Node3D
 	And controls split screen functionality. 
 """
 
+signal split_body (head) 
+
 @onready var map : GridMap = get_tree().get_first_node_in_group("map")
-@onready var body: Node3D = $Body
+@onready var heads: Node3D = $Heads
 
 #This varible makes sure the player doesn't input while a tween is active, putting them offgrid.
 var can_input = true
 
 func _ready() -> void:
-	for segment in body.get_children(): 
+	for segment in heads.get_children(): 
 		if segment is HeadOfBody: 
 			segment.change_can_input.connect(func(x): can_input = x )
 
@@ -21,7 +23,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	#if can_input == false, we can't input
 	if not can_input: return
 	
-	for segment in body.get_children():  
+	for segment in heads.get_children():  
 		if segment is not HeadOfBody: return 
 		
 		if event.is_action_pressed("turn_left"):
@@ -45,9 +47,15 @@ func _unhandled_input(event: InputEvent) -> void:
 			
 		#Split
 		if event.is_action_pressed("split"):
-			split_new_head()
-	
-# functions to handle split screen and instantiate new heads 
-
-func split_new_head(): 
-	pass 
+			var max_segments = 0 
+			var largest_body = null 
+			for head in heads.get_children(): 
+				if head is HeadOfBody:
+					var segments = head.current_segments 
+					if segments > max_segments: max_segments = segments 
+					largest_body = head 
+				
+			if max_segments >= 2: 
+				split_body.emit(largest_body) 
+			else:
+				print("Could not split; too few segments:" + str(max_segments))

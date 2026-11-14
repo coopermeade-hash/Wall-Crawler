@@ -29,3 +29,5 @@ shape = SubResource("SphereShape3D_wrm1d")
 mesh = SubResource("SphereMesh_cj48j")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=1415703491]
+
+[node name="Body" type="Node3D" parent="." unique_id=1930263432]

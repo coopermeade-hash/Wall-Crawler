@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bk4pr0tahweoa"]
 
 [ext_resource type="Script" uid="uid://bjqj7rlgge55c" path="res://Scenes/Player/head.gd" id="1_jvgke"]
-[ext_resource type="PackedScene" uid="uid://bpyo24twggm1d" path="res://Scenes/Player/head_camera.tscn" id="2_p2mrr"]
 [ext_resource type="Material" uid="uid://cetrrsedfmdm" path="res://Resources/Materials/player_mat.tres" id="3_i52pp"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wrm1d"]
@@ -14,8 +13,6 @@ height = 2.0
 
 [node name="Head" type="CharacterBody3D" unique_id=2034548410 groups=["player"]]
 script = ExtResource("1_jvgke")
-
-[node name="PlayerCamera" parent="." unique_id=793324467 instance=ExtResource("2_p2mrr")]
 
 [node name="Downcast" type="RayCast3D" parent="." unique_id=2098780948]
 target_position = Vector3(0, -2, 0)

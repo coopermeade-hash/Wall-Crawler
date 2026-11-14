@@ -13,18 +13,16 @@ const MOVE_SPEED = 0.1
 const WAIT_TIME = 0.1
 
 var head_id : int = 0 
+var current_segments : int = 1
 
-@onready var camera = $Camera3D
 @onready var raycast = $RayCast3D
 @onready var downcast = $Downcast
-
-
-
+@onready var remote_transform_3d: RemoteTransform3D = $RemoteTransform3D
+	
 #Checks if our 'down' is equal to true down, by comparing the distance.
 func check_if_sticking_to_wall(distance_limit = 0.01):
 	var our_down = (basis * Vector3.DOWN).normalized()
 	return (our_down - Vector3.DOWN).length_squared() < distance_limit
-
 
 
 #Direction is how many degrees the character will turn, in 90 degree increments.
@@ -61,7 +59,7 @@ func turn(dir := 1, basis_axis := basis.y):
 #Really more of a turning 'Up' onto a wall.
 func wall_crawl(dir = 1):
 	#Make sure we are facing a wall to start crawling it.
-	raycast.target_position = (camera.basis * Vector3.FORWARD).normalized() * 2
+	raycast.target_position = (remote_transform_3d.basis * Vector3.FORWARD).normalized() * 2
 	raycast.force_raycast_update()
 	
 	if not raycast.is_colliding():

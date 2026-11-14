@@ -10,7 +10,7 @@ const TURN_SPEED = 0.2
 #How long it takes to move a tile in seconds.
 const MOVE_SPEED = 0.1
 #The time it takes to wait inbetween a move and being able to move again. Made for fast move speeds.
-const WAIT_TIME = 0.1
+const WAIT_TIME = 0.05
 
 var head_id : int = 0 
 var current_segments : int = 1
@@ -88,13 +88,11 @@ func try_move(direction : Vector3, length = 2):
 	#The downcast is so when we are wall crawling, we walk onto thin air and reveal that we don't have gravity while wall crawling.
 	downcast.position = raycast.target_position
 	
-	
 	#If the raycast collides, something is blocking it, and we shouldn't move.
-	#TODO: Make this into a bump animation, where we run into the wall.
 	if raycast.is_colliding():
 		return
 	
-	#TODO: Make this into a stumbble animation, where we almost fall off but catch ourselves. 
+	#TODO: Make this check any collider of the body 
 	##NOTE: This makes falling impossible! For now i've removed falling, since we can't do it.
 	if not downcast.is_colliding():
 		return
@@ -113,8 +111,10 @@ func try_move(direction : Vector3, length = 2):
 	#Wait until tween is done, then make tween work.
 	change_can_input.emit(true)
 	
+	#TODO: MAKE BODY SEGMENTS TAKE LAST POS RECURSIVELY 
 
 
+#TODO: MAKE EATING ADD LENGTH TO BODY
 func try_attack():
 	raycast.target_position = Vector3.FORWARD * 2
 	raycast.force_raycast_update()
@@ -127,3 +127,15 @@ func try_attack():
 	var collider = raycast.get_collider()
 	if collider.has_method("eaten"):
 		collider.eaten()
+
+# Halves the players segments during a split
+func halve():
+	var halved_segments = ceil(current_segments / 2.0)
+	var segment_count = body.get_child_count()
+	var seg_nodes = body.get_children()
+	
+	for i in range(halved_segments, segment_count):
+		seg_nodes[i].queue_free()
+	
+	current_segments = halved_segments
+	print("Previous segments: " + str(segment_count) + "\n Current segments:" + str(current_segments))

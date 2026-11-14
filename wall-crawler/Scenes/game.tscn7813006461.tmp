@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cv8la12224fp2"]
+
+[ext_resource type="Script" uid="uid://cybt1815wncyt" path="res://Scenes/game.gd" id="1_wowpa"]
+
+[node name="Game" type="Node" unique_id=107631943]
+script = ExtResource("1_wowpa")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=219857571]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1045884907]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer" unique_id=578324850]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0

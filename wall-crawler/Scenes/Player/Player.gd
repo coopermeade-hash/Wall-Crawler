@@ -1,4 +1,5 @@
 extends Node3D
+class_name PlayerController
 
 """
 	This player controller acts as the brain to all of the heads in the Body.
@@ -6,7 +7,7 @@ extends Node3D
 	And controls split screen functionality. 
 """
 
-signal split_body (head) 
+signal create_split_body (head, size) 
 
 @onready var map : GridMap = get_tree().get_first_node_in_group("map")
 @onready var heads: Node3D = $Heads
@@ -56,6 +57,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					largest_body = head 
 				
 			if max_segments >= 2: 
-				split_body.emit(largest_body) 
+				create_split_body.emit(largest_body, floor(max_segments / 2.0)) 
+				largest_body.halve()
 			else:
 				print("Could not split; too few segments:" + str(max_segments))

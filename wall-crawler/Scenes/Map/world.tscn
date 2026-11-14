@@ -1,20 +1,22 @@
 [gd_scene format=3 uid="uid://buu8sxvplnax0"]
 
+[ext_resource type="Texture2D" uid="uid://c5bjqb0ksgfnl" path="res://Resources/Textures/alexander-ivanov-cave4.jpg" id="1_empn1"]
 [ext_resource type="MeshLibrary" uid="uid://dpg8w7ded21p8" path="res://Resources/tiles.tres" id="1_r7dep"]
 [ext_resource type="Script" uid="uid://dsaq4bkoily40" path="res://Scenes/Map/grid_map.gd" id="2_empn1"]
 [ext_resource type="PackedScene" uid="uid://eri3101y30lq" path="res://Scenes/Entity/victim.tscn" id="3_uldf5"]
 [ext_resource type="PackedScene" uid="uid://dojt6ir5jfyg6" path="res://Scenes/Player/player.tscn" id="4_ua64m"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_feb5d"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_empn1"]
+panorama = ExtResource("1_empn1")
+energy_multiplier = 0.65
 
 [sub_resource type="Sky" id="Sky_fc0e3"]
-sky_material = SubResource("ProceduralSkyMaterial_feb5d")
+sky_material = SubResource("PanoramaSkyMaterial_empn1")
 
 [sub_resource type="Environment" id="Environment_7jktm"]
 background_mode = 2
 sky = SubResource("Sky_fc0e3")
+ambient_light_sky_contribution = 0.0
 
 [node name="World" type="Node3D" unique_id=129390705]
 
@@ -29,6 +31,6 @@ environment = SubResource("Environment_7jktm")
 mesh_library = ExtResource("1_r7dep")
 script = ExtResource("2_empn1")
 victim_scene = ExtResource("3_uldf5")
-victim_chance = 1.0
+victim_chance = 0.33
 
 [node name="Player" parent="." unique_id=581983951 instance=ExtResource("4_ua64m")]

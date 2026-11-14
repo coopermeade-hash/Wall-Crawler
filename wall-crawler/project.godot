@@ -24,6 +24,7 @@ window/stretch/aspect="expand"
 
 player="Is a player, or one of it's clones"
 map="the global map"
+victim="is a victim"
 
 [input]
 

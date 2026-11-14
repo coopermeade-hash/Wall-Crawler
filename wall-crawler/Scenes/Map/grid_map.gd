@@ -60,6 +60,8 @@ func _ready() -> void:
 	#Place the player, the victims, and the exits.
 	place_player()
 	place_victims(world_gen.maze_cells)
+	for victim in get_tree().get_nodes_in_group("victim"):
+		print(victim.position)
 	
 	#Place exits in each direction.
 	for exit in left_exits:
@@ -89,6 +91,7 @@ func place_player():
 #Put victims randomly in the maze.
 func place_victims(dead_ends : Array ):
 	for dead_end in dead_ends:
+		dead_end += Vector3.ONE
 		#if a dead end is the center, skip, as that is where the player is.
 		var random_chance = randf()
 		#if there is a victim scene and we are below the victim chance.

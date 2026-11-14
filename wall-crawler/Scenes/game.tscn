@@ -1,36 +1,29 @@
 [gd_scene format=3 uid="uid://cv8la12224fp2"]
 
-[ext_resource type="MeshLibrary" uid="uid://dpg8w7ded21p8" path="res://Resources/tiles.tres" id="1_wrm1d"]
-[ext_resource type="Script" uid="uid://dsaq4bkoily40" path="res://Scenes/Map/grid_map.gd" id="2_3dryh"]
-[ext_resource type="PackedScene" uid="uid://eri3101y30lq" path="res://Scenes/Entity/victim.tscn" id="3_3dryh"]
-[ext_resource type="PackedScene" uid="uid://dojt6ir5jfyg6" path="res://Scenes/Player/player.tscn" id="3_wrm1d"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_feb5d"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-
-[sub_resource type="Sky" id="Sky_fc0e3"]
-sky_material = SubResource("ProceduralSkyMaterial_feb5d")
-
-[sub_resource type="Environment" id="Environment_7jktm"]
-background_mode = 2
-sky = SubResource("Sky_fc0e3")
+[ext_resource type="Script" uid="uid://cybt1815wncyt" path="res://Scenes/game.gd" id="1_wowpa"]
+[ext_resource type="PackedScene" uid="uid://buu8sxvplnax0" path="res://Scenes/Map/world.tscn" id="2_qxrlw"]
 
 [node name="Game" type="Node" unique_id=107631943]
+script = ExtResource("1_wowpa")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2021360245]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-shadow_enabled = true
+[node name="ColorRect" type="ColorRect" parent="." unique_id=219857571]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
-[node name="World" type="Node3D" parent="." unique_id=1177675386]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1045884907]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="World" unique_id=861552370]
-environment = SubResource("Environment_7jktm")
+[node name="GridContainer" type="GridContainer" parent="CenterContainer" unique_id=578324850]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
 
-[node name="GridMap" type="GridMap" parent="World" unique_id=1119345686 groups=["map"]]
-mesh_library = ExtResource("1_wrm1d")
-script = ExtResource("2_3dryh")
-victim_scene = ExtResource("3_3dryh")
-victim_chance = 1.0
-
-[node name="Player" parent="World" unique_id=471360206 instance=ExtResource("3_wrm1d")]
+[node name="World" parent="." unique_id=129390705 instance=ExtResource("2_qxrlw")]

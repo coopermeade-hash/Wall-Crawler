@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://bk4pr0tahweoa"]
+
+[ext_resource type="Script" uid="uid://bjqj7rlgge55c" path="res://Scenes/Player/head.gd" id="1_jvgke"]
+[ext_resource type="PackedScene" uid="uid://bpyo24twggm1d" path="res://Scenes/Player/head_camera.tscn" id="2_p2mrr"]
+[ext_resource type="Material" uid="uid://cetrrsedfmdm" path="res://Resources/Materials/player_mat.tres" id="3_i52pp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wrm1d"]
+radius = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_cj48j"]
+material = ExtResource("3_i52pp")
+radius = 1.0
+height = 2.0
+
+[node name="Head" type="CharacterBody3D" unique_id=2034548410 groups=["player"]]
+script = ExtResource("1_jvgke")
+
+[node name="PlayerCamera" parent="." unique_id=793324467 instance=ExtResource("2_p2mrr")]
+
+[node name="Downcast" type="RayCast3D" parent="." unique_id=2098780948]
+target_position = Vector3(0, -2, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=430283983]
+target_position = Vector3(0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1382918419]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=54587819]
+shape = SubResource("SphereShape3D_wrm1d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=760580072]
+mesh = SubResource("SphereMesh_cj48j")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=1415703491]

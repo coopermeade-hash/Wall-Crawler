@@ -10,9 +10,9 @@ const HALLWAY_ID = -1
 const WALL_ID = 0
 
 #The WIDTH, HEIGHT, and LENGTH of the maze. Constants are in caps.
-const WIDTH = 32
-const HEIGHT = 32
-const LENGTH = 32
+var WIDTH = 32
+var HEIGHT = 32
+var LENGTH = 32
 
 #The six cardinal directions of 3D space. 
 const DIRS = [Vector3.LEFT, Vector3.RIGHT, Vector3.UP, Vector3.DOWN, Vector3.FORWARD, Vector3.BACK]
@@ -21,6 +21,15 @@ const DIRS = [Vector3.LEFT, Vector3.RIGHT, Vector3.UP, Vector3.DOWN, Vector3.FOR
 func is_out_of_bounds(point : Vector3):
 	var is_false = point.x < 0 or point.y < 0 or point.z < 0 or point.x >= WIDTH or point.y >= HEIGHT or point.z >= LENGTH
 	return is_false
+
+var dead_ends = []
+
+
+func _init(width : int, height : int, length : int) -> void:
+	WIDTH = width
+	HEIGHT = height
+	LENGTH = length
+
 
 #Create a maze. walker_LENGTH is how long each walker will walk if it doesn't hit anything
 #Path count is the number of walkers
@@ -74,6 +83,8 @@ func create_maze(walker_LENGTH = 256, path_count = 32):
 			
 			#if the dirs are empty, die, and start a new walker.
 			if dirs.is_empty():
+				#We also add the dead end to a list of dead ends
+				dead_ends.append(current_cell)
 				break
 			
 			#Pick a random selected direction

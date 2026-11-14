@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://eri3101y30lq"]
+
+[ext_resource type="Script" uid="uid://ck4sse4mw0gc3" path="res://Scenes/Entity/victim.gd" id="1_bvq1e"]
+[ext_resource type="Material" uid="uid://3wpnaqnspnrh" path="res://Resources/Materials/victim_mat.tres" id="1_wt0wq"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
+material = ExtResource("1_wt0wq")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+
+[node name="Victim" type="CharacterBody3D" unique_id=1136784696]
+script = ExtResource("1_bvq1e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1992926711]
+mesh = SubResource("CapsuleMesh_g4v7s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2087581101]
+shape = SubResource("CapsuleShape3D_g4v7s")

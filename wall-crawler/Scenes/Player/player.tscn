@@ -3,10 +3,13 @@
 [ext_resource type="Script" uid="uid://cmejxqhu5y0y6" path="res://Scenes/Player/Player.gd" id="1_v0iea"]
 [ext_resource type="Material" uid="uid://cetrrsedfmdm" path="res://Resources/Materials/player_mat.tres" id="2_a3d8c"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_wrm1d"]
+radius = 1.0
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
+[sub_resource type="SphereMesh" id="SphereMesh_cj48j"]
 material = ExtResource("2_a3d8c")
+radius = 1.0
+height = 2.0
 
 [node name="Player" type="CharacterBody3D" unique_id=1105068022 groups=["player"]]
 script = ExtResource("1_v0iea")
@@ -15,13 +18,16 @@ script = ExtResource("1_v0iea")
 transform = Transform3D(0.99999994, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0)
 current = true
 
+[node name="Downcast" type="RayCast3D" parent="." unique_id=709710841]
+target_position = Vector3(0, -2, 0)
+
 [node name="RayCast3D" type="RayCast3D" parent="." unique_id=232803434]
 target_position = Vector3(0, 0, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=81167272]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1217030593]
-shape = SubResource("CapsuleShape3D_g4v7s")
+shape = SubResource("SphereShape3D_wrm1d")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=790232842]
-mesh = SubResource("CapsuleMesh_g4v7s")
+mesh = SubResource("SphereMesh_cj48j")

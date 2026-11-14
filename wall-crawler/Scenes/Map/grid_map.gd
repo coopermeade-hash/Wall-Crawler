@@ -27,7 +27,7 @@ func _ready() -> void:
 				set_cell_item(Vector3i(x, y, z), cells[x][y][z])
 	
 	place_player()
-	place_victims(world_gen.dead_ends)
+	place_victims(world_gen.maze_cells)
 
 
 func place_player():

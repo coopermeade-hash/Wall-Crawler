@@ -22,14 +22,6 @@ const WAIT_TIME = 0.1
 #This varible makes sure the player doesn't input while a tween is active, putting them offgrid.
 var can_input = true
 
-##TODO: Move some of the code for movement here if we dont care about grid based movement.
-func _physics_process(delta: float) -> void:
-	
-	#Simple Gravity.
-	if not is_on_floor():
-		velocity += (Vector3.DOWN).normalized()
-	move_and_slide()
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	#if can_input == false, we can't input
@@ -41,16 +33,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		turn()
 	elif event.is_action_pressed("turn_right"):
 		turn(-1)
-	#Look up or down 15 degrees. This does not affect movement
-	elif event.is_action_pressed("look_up"):
-		camera.rotation_degrees.x += 15
-		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
-	elif event.is_action_pressed("look_down"):
-		camera.rotation_degrees.x -= 15
-		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
 	
 	if event.is_action_pressed("wall_crawl"):
-		pass
+		wall_crawl()
 	
 	#Move forwards or backwards 1 meter.
 	if event.is_action("move_forward"):
@@ -58,28 +43,49 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action("move_backward"):
 		await try_move(Vector3.BACK)
 
-#Direction is how many degrees the character will turn, in 90 degree increments
-func turn(dir := 1):
+
+#Direction is how many degrees the character will turn, in 90 degree increments.
+#Basis axis is the axis of rotation, generaly being in our y axis.
+func turn(dir := 1, basis_axis := basis.y):
+	var original_scale = scale
+	var original_basis = basis
 	#Make sure we can't input while tweening
 	can_input = false
 	var tween = get_tree().create_tween()
 	#Turn 90 degrees in TURN_SPEED seconds.
-	tween.tween_property(self, "rotation:y",rotation.y + PI / 2 * dir, TURN_SPEED)
+	
+	
+	#This allows turning to work when wall crawling.
+	var target_basis = basis.rotated(basis_axis.normalized(), PI / 2 * dir)
+	
+	tween.tween_method(
+		#This function is needed or else we'll get errors when turning, as tweening basises causes problems.
+		#I would make this a seperate function, but it needs stuff in the orignal function, like target basis.
+		func(slerp_weight : float):
+			basis = original_basis.slerp(target_basis, slerp_weight)
+			scale = original_scale
+	, 0.0, 1.0, TURN_SPEED)
+	
 	await tween.finished
 	#Wait until tween is done, then make tween work.
 	can_input = true
 
 
-#Really more of a turn up
+#Really more of a turning 'Up' onto a wall.
 func wall_crawl(dir = 1):
 	#Make sure we are facing a wall to start crawling it.
-	raycast.target_position = Vector3.FORWARD * 2
+	raycast.target_position = (camera.basis * Vector3.FORWARD).normalized() * 2
 	raycast.force_raycast_update()
 	
 	if not raycast.is_colliding():
 		return
-	if raycast.get_collider() is GridMap:
-		print("YAY!")
+	if not raycast.get_collider() is GridMap:
+		return
+	
+	#Now we perform a turn in the x axis.
+	turn(1, basis.x)
+	
+
 	
 
 

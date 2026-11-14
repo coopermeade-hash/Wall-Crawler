@@ -69,7 +69,8 @@ func create_maze(walker_LENGTH = 256, path_count = 64):
 		#Set the current cell to be part of the maze.
 		cells[current_cell.x][current_cell.y][current_cell.z] = HALLWAY_ID
 		
-		maze_cells.append(current_cell)
+		if not maze_cells.has(current_cell):
+			maze_cells.append(current_cell)
 		
 		
 		#For the life of each walker...
@@ -90,7 +91,6 @@ func create_maze(walker_LENGTH = 256, path_count = 64):
 			if dirs.is_empty() or i == walker_LENGTH - 1:
 				#We also add the dead end to a list of dead ends, and maze_cells
 				dead_ends.append(current_cell)
-				maze_cells.append(current_cell)
 				break
 			
 			#Pick a random selected direction

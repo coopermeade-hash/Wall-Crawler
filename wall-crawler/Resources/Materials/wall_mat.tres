@@ -8,3 +8,4 @@ albedo_color = Color(0.8666667, 0.8666667, 0.8666667, 1)
 albedo_texture = ExtResource("1_0owp3")
 normal_enabled = true
 normal_texture = ExtResource("2_xroe4")
+texture_filter = 0

@@ -18,7 +18,7 @@ extends GridMap
 var exits = []
 
 func _ready() -> void:
-	var world_gen = WorldGen.new(world_size.x, world_size.y, world_size.z, 0)
+	var world_gen = WorldGen.new(world_size.x, world_size.y, world_size.z, 0, 0.5)
 	var cells = world_gen.create_maze(1024, 32)
 	
 	#Get exits for each direction
@@ -89,6 +89,8 @@ func place_player():
 #Put victims randomly in the maze.
 func place_victims(dead_ends : Array ):
 	for dead_end in dead_ends:
+		if Vector3i(dead_end) == local_to_map(player.position): continue
+		
 		dead_end += Vector3.ONE
 		#if a dead end is the center, skip, as that is where the player is.
 		var random_chance = randf()

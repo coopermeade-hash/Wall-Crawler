@@ -14,6 +14,8 @@ var WIDTH = 32
 var HEIGHT = 32
 var LENGTH = 32
 
+var MERGE_CHANCE = 0.1
+
 #The six cardinal directions of 3D space. 
 const DIRS = [Vector3.LEFT, Vector3.RIGHT, Vector3.UP, Vector3.DOWN, Vector3.FORWARD, Vector3.BACK]
 
@@ -25,11 +27,12 @@ func is_out_of_bounds(point : Vector3):
 var dead_ends = []
 var maze_cells = []
 
-func _init(width : int, height : int, length : int, seed = randi()) -> void:
+func _init(width : int, height : int, length : int, seed = randi(), merge_chance = 0.1) -> void:
 	seed(seed)
 	WIDTH = width
 	HEIGHT = height
 	LENGTH = length
+	MERGE_CHANCE = merge_chance
 
 
 #Create a maze. walker_LENGTH is how long each walker will walk if it doesn't hit anything
@@ -85,8 +88,9 @@ func create_maze(walker_LENGTH = 256, path_count = 64):
 			
 			#if the dirs are empty, die, and start a new walker.
 			if dirs.is_empty() or i == walker_LENGTH - 1:
-				#We also add the dead end to a list of dead ends
+				#We also add the dead end to a list of dead ends, and maze_cells
 				dead_ends.append(current_cell)
+				maze_cells.append(current_cell)
 				break
 			
 			#Pick a random selected direction
@@ -99,5 +103,29 @@ func create_maze(walker_LENGTH = 256, path_count = 64):
 				cells[current_cell.x][current_cell.y][current_cell.z] = HALLWAY_ID
 				
 			maze_cells.append(current_cell)
+	
+	#Look at each dead end, and see possible path merging candidates.
+	for dead_end in dead_ends:
+		#Check each direction, if it is in bounds and is looking at a maze_cell
+		var merge_directions = []
+		for dir in DIRS:
+			var test_cell = dead_end + dir * 2
+			if is_out_of_bounds(test_cell) or not maze_cells.has(test_cell):
+					continue
+			merge_directions.append(dir)
+		
+		#if the 
+		for merge_dir in merge_directions:
+			var random_chance = randf()
+			
+			if random_chance > MERGE_CHANCE:
+				continue
+			
+			var point = dead_end
+			for l in 2:
+				cells[point.x][point.y][point.z] = HALLWAY_ID
+				point += merge_dir
+			
+	
 	#Return the finished map.
 	return cells

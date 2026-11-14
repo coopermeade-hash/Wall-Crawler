@@ -21,6 +21,8 @@ target_position = Vector3(0, -2, 0)
 target_position = Vector3(0, 0, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1382918419]
+light_color = Color(0.99926704, 0.92443544, 0.89261824, 1)
+light_energy = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=54587819]
 shape = SubResource("SphereShape3D_wrm1d")

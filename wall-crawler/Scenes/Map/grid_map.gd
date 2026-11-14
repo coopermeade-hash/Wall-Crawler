@@ -91,6 +91,8 @@ func place_victims(dead_ends : Array ):
 	for dead_end in dead_ends:
 		if Vector3i(dead_end) == local_to_map(player.position): continue
 		
+		if get_cell_item(dead_end + Vector3.DOWN) == -1: continue
+		
 		dead_end += Vector3.ONE
 		#if a dead end is the center, skip, as that is where the player is.
 		var random_chance = randf()

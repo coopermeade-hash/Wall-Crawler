@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cv8la12224fp2"]
 
-[ext_resource type="MeshLibrary" uid="uid://dpg8w7ded21p8" path="res://Scenes/Map/WorldGen/tiles.tres" id="1_wrm1d"]
+[ext_resource type="MeshLibrary" uid="uid://dpg8w7ded21p8" path="res://Resources/tiles.tres" id="1_wrm1d"]
 [ext_resource type="Script" uid="uid://dsaq4bkoily40" path="res://Scenes/Map/grid_map.gd" id="2_3dryh"]
 [ext_resource type="PackedScene" uid="uid://dojt6ir5jfyg6" path="res://Scenes/Player/player.tscn" id="3_wrm1d"]
 

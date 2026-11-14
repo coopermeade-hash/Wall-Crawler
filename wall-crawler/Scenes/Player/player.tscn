@@ -1,8 +1,14 @@
 [gd_scene format=3 uid="uid://dojt6ir5jfyg6"]
 
 [ext_resource type="Script" uid="uid://cmejxqhu5y0y6" path="res://Scenes/Player/Player.gd" id="1_v0iea"]
+[ext_resource type="Material" uid="uid://cetrrsedfmdm" path="res://Resources/Materials/player_mat.tres" id="2_a3d8c"]
 
-[node name="Player" type="Node3D" unique_id=471360206 groups=["player"]]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
+material = ExtResource("2_a3d8c")
+
+[node name="Player" type="CharacterBody3D" unique_id=1105068022 groups=["player"]]
 script = ExtResource("1_v0iea")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=519416924]
@@ -13,3 +19,9 @@ current = true
 target_position = Vector3(0, 0, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=81167272]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1217030593]
+shape = SubResource("CapsuleShape3D_g4v7s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=790232842]
+mesh = SubResource("CapsuleMesh_g4v7s")

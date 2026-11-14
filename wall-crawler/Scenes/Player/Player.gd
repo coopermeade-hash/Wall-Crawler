@@ -1,4 +1,4 @@
-extends Node3D
+extends CharacterBody3D
 
 """This is a simple player controller. Splitscreen effects are to added later.
 
@@ -22,7 +22,16 @@ const WAIT_TIME = 0.1
 #This varible makes sure the player doesn't input while a tween is active, putting them offgrid.
 var can_input = true
 
-func _input(event: InputEvent) -> void:
+##TODO: Move some of the code for movement here if we dont care about grid based movement.
+func _physics_process(delta: float) -> void:
+	
+	#Simple Gravity.
+	if not is_on_floor():
+		velocity += (Vector3.DOWN).normalized()
+	move_and_slide()
+
+
+func _unhandled_input(event: InputEvent) -> void:
 	#if can_input == false, we can't input
 	if not can_input: return
 	
@@ -39,6 +48,9 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("look_down"):
 		camera.rotation_degrees.x -= 15
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
+	
+	if event.is_action_pressed("wall_crawl"):
+		pass
 	
 	#Move forwards or backwards 1 meter.
 	if event.is_action("move_forward"):
@@ -57,6 +69,18 @@ func turn(dir := 1):
 	#Wait until tween is done, then make tween work.
 	can_input = true
 
+
+#Really more of a turn up
+func wall_crawl(dir = 1):
+	#Make sure we are facing a wall to start crawling it.
+	raycast.target_position = Vector3.FORWARD * 2
+	raycast.force_raycast_update()
+	
+	if not raycast.is_colliding():
+		return
+	if raycast.get_collider() is GridMap:
+		print("YAY!")
+	
 
 
 #Direction is where we are moving, length is how long a step is in meters.

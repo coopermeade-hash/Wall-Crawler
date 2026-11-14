@@ -6,7 +6,15 @@
 material = ExtResource("1_x52yk")
 size = Vector3(2, 2, 2)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_x52yk"]
+size = Vector3(2, 2, 2)
+
 [node name="Tiles" type="Node3D" unique_id=315058920]
 
 [node name="Wall" type="MeshInstance3D" parent="." unique_id=634563246]
 mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall" unique_id=135292115]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D" unique_id=969343557]
+shape = SubResource("BoxShape3D_x52yk")

@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://cm1jin4l0xq6f"
-path="res://.godot/imported/bugwalk.mp3-1330925ea2c2513daed3b30e67717075.mp3str"
+path="res://.godot/imported/bugwalk.mp3-6b2d62947b447b7a258e874a236a8ebc.mp3str"
 
 [deps]
 
-source_file="res://Resources/sounds/bugwalk.mp3"
-dest_files=["res://.godot/imported/bugwalk.mp3-1330925ea2c2513daed3b30e67717075.mp3str"]
+source_file="res://Resources/Sounds/bugwalk.mp3"
+dest_files=["res://.godot/imported/bugwalk.mp3-6b2d62947b447b7a258e874a236a8ebc.mp3str"]
 
 [params]
 

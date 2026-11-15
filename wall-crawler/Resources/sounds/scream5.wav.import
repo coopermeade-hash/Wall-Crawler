@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dgiaw5dvvkipc"
-path="res://.godot/imported/scream5.wav-2919aaf2080e4c0482a6dccb8a9dfcc6.sample"
+path="res://.godot/imported/scream5.wav-1bb49427faeddd342a326cb4cf36e2c2.sample"
 
 [deps]
 
-source_file="res://Resources/sounds/scream5.wav"
-dest_files=["res://.godot/imported/scream5.wav-2919aaf2080e4c0482a6dccb8a9dfcc6.sample"]
+source_file="res://Resources/Sounds/scream5.wav"
+dest_files=["res://.godot/imported/scream5.wav-1bb49427faeddd342a326cb4cf36e2c2.sample"]
 
 [params]
 

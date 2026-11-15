@@ -121,6 +121,7 @@ func try_move(direction : Vector3, length = STEP_SIZE):
 	_move_segment(0, old_position, basis_dir)
 	
 	print(position) 
+	_play_walk_sound()
 	
 	##NOTE: Aadded this to make holding W not as fast on fast movespeeds. Waits a additional time period.
 	await get_tree().create_timer(WAIT_TIME).timeout
@@ -214,4 +215,11 @@ func _play_digest_sound():
 	digest.volume_db = -20.
 	digest.pitch_scale = randf_range(0.8, 1.2)
 	digest.play()
-	
+
+func _play_walk_sound():
+	walk.stream = walk_sound
+	walk.volume_db = -10.
+	walk.pitch_scale = randf_range(0.8, 1.2)
+	walk.play(randf_range(0, walk_sound.get_length()))
+	await get_tree().create_timer(randf_range(0.33, 1)).timeout 
+	walk.stop()

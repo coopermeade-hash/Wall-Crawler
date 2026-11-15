@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bk4pr0tahweoa"]
 
 [ext_resource type="Script" uid="uid://bjqj7rlgge55c" path="res://Scenes/Player/head.gd" id="1_jvgke"]
-[ext_resource type="AudioStream" uid="uid://bnl2ld73viyvw" path="res://Resources/Sounds/gurgle.wav" id="2_p2mrr"]
-[ext_resource type="AudioStream" uid="uid://cm1jin4l0xq6f" path="res://Resources/Sounds/bugwalk.mp3" id="3_i52pp"]
+[ext_resource type="AudioStream" uid="uid://bnl2ld73viyvw" path="res://Resources/sounds/gurgle.wav" id="2_p2mrr"]
+[ext_resource type="AudioStream" uid="uid://cm1jin4l0xq6f" path="res://Resources/sounds/bugwalk.mp3" id="3_i52pp"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wrm1d"]
 radius = 1.0

@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://c0vipa5nto8dc"
-path="res://.godot/imported/gore3.mp3-9358e5f8576a8c5c17bbbd229ac12b56.mp3str"
+path="res://.godot/imported/gore3.mp3-512e7f7af76ba8cb7020dda231293d84.mp3str"
 
 [deps]
 
-source_file="res://Resources/sounds/gore3.mp3"
-dest_files=["res://.godot/imported/gore3.mp3-9358e5f8576a8c5c17bbbd229ac12b56.mp3str"]
+source_file="res://Resources/Sounds/gore3.mp3"
+dest_files=["res://.godot/imported/gore3.mp3-512e7f7af76ba8cb7020dda231293d84.mp3str"]
 
 [params]
 

@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dhj7rhy8bjrhx" path="res://Scenes/Control/start_menu.gd" id="1_ntlg3"]
 [ext_resource type="Texture2D" uid="uid://tuc30hh3n300" path="res://Resources/Sprites/Menu_sprite_text.png" id="2_exdhs"]
 [ext_resource type="FontFile" uid="uid://u3id7psecji5" path="res://Resources/Fonts/FINGER PRINTED.TTF" id="3_exdhs"]
+[ext_resource type="AudioStream" uid="uid://ni0k1b2yvu7h" path="res://Resources/Sounds/Music/GameJam1.mp3" id="5_sf87w"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
 font = ExtResource("3_exdhs")
@@ -81,5 +82,9 @@ theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_exdhs")
 text = "START GAME"
 flat = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1421470654]
+stream = ExtResource("5_sf87w")
+autoplay = true
 
 [connection signal="pressed" from="MirrorOverlay/VBoxContainer/Start Game" to="." method="_on_start_game_pressed"]

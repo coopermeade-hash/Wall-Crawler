@@ -23,7 +23,7 @@ var exits = []
 
 
 func _ready() -> void:
-	var world_gen = WorldGen.new(world_size.x, world_size.y, world_size.z, 0, merge_chance)
+	var world_gen = WorldGen.new(world_size.x, world_size.y, world_size.z, randi(), merge_chance)
 	var cells = world_gen.create_maze(1024, 32)
 	
 	#Get exits for each direction

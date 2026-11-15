@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://ni0k1b2yvu7h"
-path="res://.godot/imported/GameJam1.mp3-c5edaa7455967156a632305e88a9ac83.mp3str"
+path="res://.godot/imported/GameJam1.mp3-e40cea11381e1c878979d9a15b2cd2fc.mp3str"
 
 [deps]
 
-source_file="res://Resources/sounds/Music/GameJam1.mp3"
-dest_files=["res://.godot/imported/GameJam1.mp3-c5edaa7455967156a632305e88a9ac83.mp3str"]
+source_file="res://Resources/Sounds/Music/GameJam1.mp3"
+dest_files=["res://.godot/imported/GameJam1.mp3-e40cea11381e1c878979d9a15b2cd2fc.mp3str"]
 
 [params]
 

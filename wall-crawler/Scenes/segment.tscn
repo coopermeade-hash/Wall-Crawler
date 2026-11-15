@@ -11,6 +11,9 @@ material = ExtResource("1_8gc6n")
 radius = 1.0
 height = 2.0
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
+size = Vector3(2, 2, 2)
+
 [node name="Segment" type="StaticBody3D" unique_id=2084777328]
 script = ExtResource("1_4bgdj")
 
@@ -22,5 +25,6 @@ disabled = true
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 mesh = SubResource("SphereMesh_r4hr2")
 
-[node name="Downcast" type="RayCast3D" parent="." unique_id=1871742337]
-target_position = Vector3(0, -2, 0)
+[node name="Shapecast" type="ShapeCast3D" parent="." unique_id=1251142704]
+shape = SubResource("BoxShape3D_g4v7s")
+target_position = Vector3(0, 0, 0)

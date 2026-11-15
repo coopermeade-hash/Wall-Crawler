@@ -46,6 +46,8 @@ func _update_viewport_size() -> void:
 		subviewport_node.size.x = game_size.x / screen_container.columns
 		subviewport_node.size.y = game_size.y / ceil(float(screen_container.get_child_count()) / float(screen_container.columns))
 
+# NOTE: CURRENTLY UNUSED
+
 func split(body) -> void :
 	print("Splitting body")
 	var new_head = load("uid://bk4pr0tahweoa") 

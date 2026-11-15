@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cyqnnoiqa3ofy"
-path="res://.godot/imported/ALGER.TTF-cf1e0dac9f33a483ff841c63c9bea800.fontdata"
+uid="uid://di0ttqf28uno8"
+path="res://.godot/imported/KiwiSoda.ttf-ae17ed662c50f42b050d44e5df039476.fontdata"
 
 [deps]
 
-source_file="res://Resources/Fonts/ALGER.TTF"
-dest_files=["res://.godot/imported/ALGER.TTF-cf1e0dac9f33a483ff841c63c9bea800.fontdata"]
+source_file="res://Resources/Fonts/KiwiSoda.ttf"
+dest_files=["res://.godot/imported/KiwiSoda.ttf-ae17ed662c50f42b050d44e5df039476.fontdata"]
 
 [params]
 

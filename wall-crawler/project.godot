@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="WallCrawler"
-run/main_scene="uid://cv8la12224fp2"
+run/main_scene="uid://bp644bf1la5t"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 

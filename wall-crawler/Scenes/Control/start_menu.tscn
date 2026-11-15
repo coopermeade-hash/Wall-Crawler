@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://bp644bf1la5t"]
+
+[ext_resource type="Texture2D" uid="uid://3owk0jjrdir7" path="res://Resources/Sprites/Mirror_overlay.png" id="1_j6vwd"]
+[ext_resource type="Script" uid="uid://dhj7rhy8bjrhx" path="res://Scenes/Control/start_menu.gd" id="1_ntlg3"]
+[ext_resource type="Texture2D" uid="uid://tuc30hh3n300" path="res://Resources/Sprites/Menu_sprite_text.png" id="2_exdhs"]
+[ext_resource type="FontFile" uid="uid://u3id7psecji5" path="res://Resources/Fonts/FINGER PRINTED.TTF" id="3_exdhs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
+font = ExtResource("3_exdhs")
+font_size = 64
+font_color = Color(0, 0, 0, 1)
+
+[node name="StartMenu" type="Control" unique_id=1930233652]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ntlg3")
+
+[node name="Void" type="ColorRect" parent="." unique_id=1172794663]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MirrorOverlay" type="TextureRect" parent="." unique_id=1702550197]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -303.5
+offset_top = 1.0
+offset_right = 303.5
+offset_bottom = 848.0
+grow_horizontal = 2
+texture = ExtResource("1_j6vwd")
+
+[node name="MenuSpriteText" type="TextureRect" parent="MirrorOverlay" unique_id=329835715]
+z_index = -1
+layout_mode = 0
+offset_left = 63.5
+offset_top = 153.0
+offset_right = 545.5
+offset_bottom = 780.0
+texture = ExtResource("2_exdhs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MirrorOverlay" unique_id=2055005850]
+custom_minimum_size = Vector2(400, 500)
+custom_maximum_size = Vector2(400, -1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 180.0
+offset_right = 200.0
+offset_bottom = 680.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="MirrorOverlay/VBoxContainer" unique_id=743161746]
+layout_mode = 2
+offset_transform_enabled = true
+text = "CHIRAL"
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+
+[node name="Start Game" type="Button" parent="MirrorOverlay/VBoxContainer" unique_id=1393117024]
+custom_maximum_size = Vector2(200, -1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(100, 0)
+offset_transform_visual_only = false
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_exdhs")
+text = "START GAME"
+flat = true
+
+[connection signal="pressed" from="MirrorOverlay/VBoxContainer/Start Game" to="." method="_on_start_game_pressed"]

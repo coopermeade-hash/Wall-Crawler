@@ -16,6 +16,9 @@ const BODY_SEGMENT_SCENE = preload("uid://b0ldss6pcm4bu")
 # How long a step is in meters
 const STEP_SIZE : int = 2 
 
+@export var digest_sound : AudioStream
+@export var walk_sound : AudioStream
+
 var head_id : int = 0 
 var current_segments : int = 1
 var dir : Vector3 = Vector3.FORWARD
@@ -24,6 +27,8 @@ var dir : Vector3 = Vector3.FORWARD
 @onready var downcast = $Downcast
 @onready var remote_transform_3d: RemoteTransform3D = $RemoteTransform3D
 @onready var body: Node3D = $Body
+@onready var digest: AudioStreamPlayer = $Digest
+@onready var walk: AudioStreamPlayer = $Walk
 
 func _ready() -> void:
 	current_segments = 1 + body.get_child_count()
@@ -136,6 +141,7 @@ func try_attack():
 	var collider = raycast.get_collider()
 	if collider.has_method("eaten"):
 		_spawn_segment(body.get_child_count())
+		_play_digest_sound()
 		collider.eaten()
 
 
@@ -202,3 +208,10 @@ func _colliding_segments_downcast() -> bool:
 				if collider is GridMap:
 					segment_touching_ground = true 
 	return segment_touching_ground
+
+func _play_digest_sound():
+	digest.stream = digest_sound
+	digest.volume_db = -20.
+	digest.pitch_scale = randf_range(0.8, 1.2)
+	digest.play()
+	

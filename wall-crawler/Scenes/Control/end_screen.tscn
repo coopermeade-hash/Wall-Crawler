@@ -3,6 +3,19 @@
 [ext_resource type="Script" uid="uid://cuufg5cnka5sg" path="res://Scenes/Control/end_screen.gd" id="1_4vtb7"]
 [ext_resource type="Texture2D" uid="uid://cyrwp4dbnntld" path="res://Resources/Textures/endscreen.png" id="2_0pcaf"]
 [ext_resource type="FontFile" uid="uid://di0ttqf28uno8" path="res://Resources/Fonts/KiwiSoda.ttf" id="2_ax2s6"]
+[ext_resource type="AudioStream" uid="uid://c33ved0ylig2u" path="res://Resources/sounds/scream1.wav" id="2_lpbqn"]
+[ext_resource type="AudioStream" uid="uid://d0xb5x23v5k0q" path="res://Resources/sounds/scream2.wav" id="3_7lbu0"]
+[ext_resource type="AudioStream" uid="uid://6sl2sc3hr4c3" path="res://Resources/sounds/scream3.wav" id="4_6ea5h"]
+[ext_resource type="AudioStream" uid="uid://dfiy626ao7n7u" path="res://Resources/sounds/scream4.wav" id="5_gwwuq"]
+[ext_resource type="AudioStream" uid="uid://dgiaw5dvvkipc" path="res://Resources/sounds/scream5.wav" id="6_q06ux"]
+[ext_resource type="AudioStream" uid="uid://cd6wo2jhaukns" path="res://Resources/sounds/scream6.wav" id="7_ge72f"]
+[ext_resource type="AudioStream" uid="uid://dqcu514b72skw" path="res://Resources/sounds/scream7.wav" id="8_mfw6u"]
+[ext_resource type="AudioStream" uid="uid://bi455njrrip8j" path="res://Resources/sounds/monster1.wav" id="9_pk2di"]
+[ext_resource type="AudioStream" uid="uid://b8sae6qd7rifq" path="res://Resources/sounds/monster2.wav" id="10_q7f5i"]
+[ext_resource type="AudioStream" uid="uid://c3de3bfer4dy" path="res://Resources/sounds/monster3.wav" id="11_nvcbb"]
+[ext_resource type="AudioStream" uid="uid://cxhnj2vwia8w7" path="res://Resources/sounds/monster4.wav" id="12_y53ir"]
+[ext_resource type="AudioStream" uid="uid://cce8mjycxl434" path="res://Resources/sounds/monster5.wav" id="13_3npt6"]
+[ext_resource type="AudioStream" uid="uid://tvfa5r1jvtsd" path="res://Resources/sounds/monster6.wav" id="14_oihnw"]
 
 [node name="EndScreen" type="Control" unique_id=1765035357]
 layout_mode = 3
@@ -12,6 +25,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4vtb7")
+sound_list = Array[AudioStream]([ExtResource("2_lpbqn"), ExtResource("3_7lbu0"), ExtResource("4_6ea5h"), ExtResource("5_gwwuq"), ExtResource("6_q06ux"), ExtResource("7_ge72f"), ExtResource("8_mfw6u"), ExtResource("9_pk2di"), ExtResource("10_q7f5i"), ExtResource("11_nvcbb"), ExtResource("12_y53ir"), ExtResource("13_3npt6"), ExtResource("14_oihnw")])
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1295962896]
 layout_mode = 1
@@ -62,5 +76,7 @@ offset_bottom = 69.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_0pcaf")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=470694840]
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

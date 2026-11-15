@@ -109,6 +109,8 @@ func place_victims(dead_ends : Array ):
 
 #Place an exit at the star point, going in a certain direction
 func place_exit(start : Vector3, direction : Vector3, down_dir = Vector3.DOWN, pit_length := 6, ledge_length = 3):
+	var new_exit = load("res://Scenes/Map/exit.tscn").instantiate()
+	
 	var point = start
 	#Move forward, digging forward from the exit.
 	for l in pit_length + ledge_length + 1:
@@ -122,3 +124,5 @@ func place_exit(start : Vector3, direction : Vector3, down_dir = Vector3.DOWN, p
 			set_cell_item(point, 1)
 		
 		point += direction
+	new_exit.position = map_to_local(point)
+	add_child(new_exit)

@@ -11,9 +11,14 @@ const TURN_SPEED = 0.2
 const MOVE_SPEED = 0.1
 #The time it takes to wait inbetween a move and being able to move again. Made for fast move speeds.
 const WAIT_TIME = 0.05
+#The body segment scene
+const BODY_SEGMENT_SCENE = preload("uid://b0ldss6pcm4bu") 
+# How long a step is in meters
+const STEP_SIZE : int = 2 
 
 var head_id : int = 0 
 var current_segments : int = 1
+var dir : Vector3 = Vector3.FORWARD
 
 @onready var raycast = $RayCast3D
 @onready var downcast = $Downcast
@@ -76,7 +81,7 @@ func wall_crawl(dir = 1):
 
 
 #Direction is where we are moving, length is how long a step is in meters.
-func try_move(direction : Vector3, length = 2):
+func try_move(direction : Vector3, length = STEP_SIZE):
 	
 	#Set the raycast to where the next tile is, and update it.
 	
@@ -98,20 +103,27 @@ func try_move(direction : Vector3, length = 2):
 		return
 	
 	#The basis, times the direction so it properly goes to where we are facing, times two so we move a full tile.
+	dir = direction 
 	var basis_dir = (self.basis * direction).normalized() * length
 	
+	var old_position = position 
+	
+	#Turn 90 degrees in TURN_SPEED seconds.
 	change_can_input.emit(false)
 	var tween = get_tree().create_tween()
-	#Turn 90 degrees in TURN_SPEED seconds.
 	tween.tween_property(self, "position", position + basis_dir, MOVE_SPEED)
 	await tween.finished
 	
+	#Moves segments recursively 
+	_move_segment(0, old_position, basis_dir)
+	
+	print(position) 
+	
 	##NOTE: Aadded this to make holding W not as fast on fast movespeeds. Waits a additional time period.
 	await get_tree().create_timer(WAIT_TIME).timeout
+	
 	#Wait until tween is done, then make tween work.
 	change_can_input.emit(true)
-	
-	#TODO: MAKE BODY SEGMENTS TAKE LAST POS RECURSIVELY 
 
 
 #TODO: MAKE EATING ADD LENGTH TO BODY
@@ -126,6 +138,7 @@ func try_attack():
 	
 	var collider = raycast.get_collider()
 	if collider.has_method("eaten"):
+		_spawn_segment(body.get_child_count())
 		collider.eaten()
 
 # Halves the players segments during a split
@@ -139,3 +152,33 @@ func halve():
 	
 	current_segments = halved_segments
 	print("Previous segments: " + str(segment_count) + "\n Current segments:" + str(current_segments))
+
+func _spawn_segment(i : int): 
+	var seg = BODY_SEGMENT_SCENE.instantiate()
+	body.add_child(seg) 
+	
+	if i == 0: 
+		var direc = (self.basis * dir).normalized() * STEP_SIZE
+		seg.position = position - direc
+	else: 
+		var last_segment = body.get_child(i-1)
+		var direc = (last_segment.basis * last_segment.dir).normalized() * STEP_SIZE
+		seg.position = last_segment.position - direc 
+	
+	print ("Spawned segment " + str(body.get_child_count()))
+		
+func _move_segment(i : int, new_pos : Vector3, basis_dir : Vector3): 
+	if body.get_child_count() <= 0: return #base case 
+	
+	print("Moved segment" + str(i))
+	
+	var segment = body.get_child(i) 
+	var old_pos = segment.position
+	var old_dir = segment.dir 
+	
+	segment.dir = basis_dir
+	segment.position = new_pos 
+	
+	#tail recursion 
+	if body.get_child_count() - (i+1) > 0: 
+		_move_segment(i+1, old_pos, old_dir)

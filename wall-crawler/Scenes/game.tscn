@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cv8la12224fp2"]
 
 [ext_resource type="Script" uid="uid://cybt1815wncyt" path="res://Scenes/game.gd" id="1_wowpa"]
+[ext_resource type="AudioStream" uid="uid://cn3o5aea6b2t" path="res://Resources/sounds/Music/crawler.mp3" id="2_qxrlw"]
 
 [node name="Game" type="Node" unique_id=107631943]
 script = ExtResource("1_wowpa")
@@ -24,3 +25,7 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=279865668]
+stream = ExtResource("2_qxrlw")
+autoplay = true

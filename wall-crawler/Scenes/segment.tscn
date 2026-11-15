@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://duk6lhdrn462r" path="res://Scenes/segment.gd" id="1_4bgdj"]
 [ext_resource type="Material" uid="uid://cetrrsedfmdm" path="res://Resources/Materials/player_mat.tres" id="1_8gc6n"]
-[ext_resource type="PackedScene" uid="uid://bxmmr3pcuerfi" path="res://Resources/Model/Caterpillar_Body (2).glb" id="2_r4hr2"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4bgdj"]
 radius = 1.0
@@ -22,12 +21,7 @@ script = ExtResource("1_4bgdj")
 shape = SubResource("SphereShape3D_4bgdj")
 disabled = true
 
-[node name="Caterpillar_Body" parent="." unique_id=1166028111 instance=ExtResource("2_r4hr2")]
-transform = Transform3D(1.5, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, -0.1, 0)
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=86341696]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
-visible = false
 mesh = SubResource("SphereMesh_r4hr2")
 
 [node name="Shapecast" type="ShapeCast3D" parent="." unique_id=1251142704]

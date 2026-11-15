@@ -12,11 +12,11 @@ const lethal_velocity = 100
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer3D
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 @onready var gpu_particles_3d: GPUParticles3D = $GPUParticles3D
-@onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
+@onready var victim: Node3D = $Victim
 
 #ADD ANY EATING SHENANIGANS NOW.
 func eaten():
-	mesh_instance_3d.hide()
+	victim.hide()
 	collision_shape_3d.disabled = true 
 	gpu_particles_3d.emitting = true 
 	var sound_duration = _play_death_sound()

@@ -2,7 +2,10 @@
 
 [ext_resource type="Script" uid="uid://ck4sse4mw0gc3" path="res://Scenes/Entity/victim.gd" id="1_bvq1e"]
 [ext_resource type="Material" uid="uid://3wpnaqnspnrh" path="res://Resources/Materials/victim_mat.tres" id="1_wt0wq"]
-[ext_resource type="PackedScene" uid="uid://brqv48rfjf6qx" path="res://Resources/Model/Victim.glb" id="3_oroiv"]
+[ext_resource type="AudioStream" uid="uid://dclgs2fg26jni" path="res://Resources/sounds/gore2.mp3" id="3_oroiv"]
+[ext_resource type="AudioStream" uid="uid://c0vipa5nto8dc" path="res://Resources/sounds/gore3.mp3" id="3_tbhst"]
+[ext_resource type="AudioStream" uid="uid://ch12211nb76lx" path="res://Resources/sounds/gore.mp3" id="4_gsnfh"]
+[ext_resource type="PackedScene" uid="uid://brqv48rfjf6qx" path="res://Resources/Model/Victim.glb" id="6_gsnfh"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
 material = ExtResource("1_wt0wq")
@@ -55,6 +58,10 @@ rings = 4
 
 [node name="Victim" type="CharacterBody3D" unique_id=1136784696 groups=["victim"]]
 script = ExtResource("1_bvq1e")
+sound_list = Array[AudioStream]([ExtResource("3_oroiv"), ExtResource("3_tbhst"), ExtResource("4_gsnfh")])
+
+[node name="Victim" parent="." unique_id=1738169378 instance=ExtResource("6_gsnfh")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.4, 0.5)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1992926711]
 visible = false
@@ -79,5 +86,4 @@ trail_lifetime = 0.2
 process_material = SubResource("ParticleProcessMaterial_yf5fn")
 draw_pass_1 = SubResource("CapsuleMesh_3gngh")
 
-[node name="Victim" parent="." unique_id=1738169378 instance=ExtResource("3_oroiv")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.4, 0.5)
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer" parent="." unique_id=169152669]

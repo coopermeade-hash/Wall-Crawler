@@ -1,15 +1,10 @@
 [gd_scene format=3 uid="uid://bk4pr0tahweoa"]
 
 [ext_resource type="Script" uid="uid://bjqj7rlgge55c" path="res://Scenes/Player/head.gd" id="1_jvgke"]
-[ext_resource type="Material" uid="uid://cetrrsedfmdm" path="res://Resources/Materials/player_mat.tres" id="3_i52pp"]
+[ext_resource type="PackedScene" uid="uid://bgbn4u7k0owu8" path="res://Resources/Model/Caterpillar_Head.glb" id="3_jvgke"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wrm1d"]
 radius = 1.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_cj48j"]
-material = ExtResource("3_i52pp")
-radius = 1.0
-height = 2.0
 
 [node name="Head" type="CharacterBody3D" unique_id=2034548410 groups=["player"]]
 script = ExtResource("1_jvgke")
@@ -27,10 +22,10 @@ light_energy = 0.5
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=54587819]
 shape = SubResource("SphereShape3D_wrm1d")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=760580072]
-mesh = SubResource("SphereMesh_cj48j")
-
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=1415703491]
+
+[node name="Caterpillar_Head" parent="." unique_id=1729339870 instance=ExtResource("3_jvgke")]
+visible = false
 
 [node name="Body" type="Node3D" parent="." unique_id=1930263432]
 top_level = true

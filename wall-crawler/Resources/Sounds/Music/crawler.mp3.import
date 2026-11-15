@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://cn3o5aea6b2t"
-path="res://.godot/imported/crawler.mp3-7cc9a40ff3b84d303940d91516f3dfeb.mp3str"
+path="res://.godot/imported/crawler.mp3-d5e04f847dc58e14fb849c1cd62b921b.mp3str"
 
 [deps]
 
-source_file="res://Resources/Sounds/Music/crawler.mp3"
-dest_files=["res://.godot/imported/crawler.mp3-7cc9a40ff3b84d303940d91516f3dfeb.mp3str"]
+source_file="res://Resources/sounds/Music/crawler.mp3"
+dest_files=["res://.godot/imported/crawler.mp3-d5e04f847dc58e14fb849c1cd62b921b.mp3str"]
 
 [params]
 

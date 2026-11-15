@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bjqj7rlgge55c" path="res://Scenes/Player/head.gd" id="1_jvgke"]
 [ext_resource type="AudioStream" uid="uid://bnl2ld73viyvw" path="res://Resources/sounds/gurgle.wav" id="2_p2mrr"]
 [ext_resource type="AudioStream" uid="uid://cm1jin4l0xq6f" path="res://Resources/sounds/bugwalk.mp3" id="3_i52pp"]
-[ext_resource type="PackedScene" uid="uid://bgbn4u7k0owu8" path="res://Resources/Model/Caterpillar_Head.glb" id="3_jvgke"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wrm1d"]
 radius = 1.0
@@ -27,9 +26,6 @@ light_energy = 0.5
 shape = SubResource("SphereShape3D_wrm1d")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=1415703491]
-
-[node name="Caterpillar_Head" parent="." unique_id=1729339870 instance=ExtResource("3_jvgke")]
-visible = false
 
 [node name="Body" type="Node3D" parent="." unique_id=1930263432]
 top_level = true

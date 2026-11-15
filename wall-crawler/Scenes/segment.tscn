@@ -22,7 +22,8 @@ script = ExtResource("1_4bgdj")
 shape = SubResource("SphereShape3D_4bgdj")
 disabled = true
 
-[node name="Caterpillar_Body (2)" parent="." unique_id=1166028111 instance=ExtResource("2_r4hr2")]
+[node name="Caterpillar_Body" parent="." unique_id=1166028111 instance=ExtResource("2_r4hr2")]
+transform = Transform3D(1.5, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, -0.1, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=86341696]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)

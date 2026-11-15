@@ -18,6 +18,9 @@ extends GridMap
 var exits = []
 
 
+
+
+
 func _ready() -> void:
 	var world_gen = WorldGen.new(world_size.x, world_size.y, world_size.z, 0, 0.5)
 	var cells = world_gen.create_maze(1024, 32)

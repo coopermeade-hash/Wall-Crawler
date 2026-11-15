@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://6qehwh5jqn3m"]
+
+[ext_resource type="Script" uid="uid://cj7f16v87hyge" path="res://Scenes/Map/exit.gd" id="1_pcb87"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
+size = Vector3(2, 2, 2)
+
+[node name="Exit" type="Area3D" unique_id=1210147109]
+script = ExtResource("1_pcb87")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=857207112]
+shape = SubResource("BoxShape3D_g4v7s")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

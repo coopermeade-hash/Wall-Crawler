@@ -1,7 +1,7 @@
 extends CharacterBody3D
 class_name HeadOfBody 
 
-##NOTE: PLAYER COLLISON IS A SPHERE TO AVOID BEING NUDGED WHEN ROTATING IN X AXIS. DO NOT CHANGE IT.
+##NOTE: BODY AND HEAD COLLISON IS A SPHERE TO AVOID BEING NUDGED WHEN ROTATING IN X AXIS. DO NOT CHANGE IT.
 
 signal change_can_input(tof : bool)
 
@@ -39,18 +39,15 @@ func check_if_sticking_to_wall(distance_limit = 0.01):
 func turn(dir := 1, basis_axis := basis.y):
 	var original_scale = scale
 	var original_basis = basis
+	
 	#Make sure we can't input while tweening
 	change_can_input.emit(false)
 	var tween = get_tree().create_tween()
-	#Turn 90 degrees in TURN_SPEED seconds.
-	
-	##NOTE: I got the target basis and slerp idea from google's AI. 
-	##I tested the damn thing piece by piece so I would use as little as possible, but it would give errors about scaling.
-	##I'm sorry, please dont stone me. -Cooper
 	
 	#This allows turning to work when wall crawling.
 	var target_basis = basis.rotated(basis_axis.normalized(), PI / 2 * dir)
 	
+	#Turn 90 degrees in TURN_SPEED seconds.
 	tween.tween_method(
 		#This function is needed or else we'll get errors when turning, as tweening basises causes problems.
 		#I would make this a seperate function, but it needs stuff in the orignal function, like target basis.
@@ -58,8 +55,8 @@ func turn(dir := 1, basis_axis := basis.y):
 			basis = original_basis.slerp(target_basis, slerp_weight)
 			scale = original_scale
 	, 0.0, 1.0, TURN_SPEED)
-	##END AI INFLUENCED SECTION.
 	await tween.finished
+	
 	#Wait until tween is done, then make tween work.
 	change_can_input.emit(true)
 	
@@ -82,11 +79,10 @@ func wall_crawl(dir = 1):
 
 #Direction is where we are moving, length is how long a step is in meters.
 func try_move(direction : Vector3, length = STEP_SIZE):
-	
 	#Set the raycast to where the next tile is, and update it.
 	
 	##NOTE: we set the raycast to the real direction, not the basis direction since will rotate with the player, 
-	##as it is a child node.
+	##      as it is a child node.
 	raycast.target_position = direction * length
 	raycast.force_raycast_update()
 	
@@ -97,18 +93,20 @@ func try_move(direction : Vector3, length = STEP_SIZE):
 	if raycast.is_colliding():
 		return
 	
-	#TODO: Make this check any collider of the body 
-	##NOTE: This makes falling impossible! For now i've removed falling, since we can't do it.
-	if not downcast.is_colliding():
+	# Check to make sure some segment is touching solid ground
+	if body.get_child_count() == 0:
+		if not downcast.is_colliding(): return 
+	elif not _colliding_segments_downcast():
 		return
 	
 	#The basis, times the direction so it properly goes to where we are facing, times two so we move a full tile.
 	dir = direction 
 	var basis_dir = (self.basis * direction).normalized() * length
 	
+	#save old position for segments 
 	var old_position = position 
 	
-	#Turn 90 degrees in TURN_SPEED seconds.
+	#Move to new position in MOVE_SPEED seconds
 	change_can_input.emit(false)
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", position + basis_dir, MOVE_SPEED)
@@ -126,7 +124,6 @@ func try_move(direction : Vector3, length = STEP_SIZE):
 	change_can_input.emit(true)
 
 
-#TODO: MAKE EATING ADD LENGTH TO BODY
 func try_attack():
 	raycast.target_position = Vector3.FORWARD * 2
 	raycast.force_raycast_update()
@@ -141,7 +138,9 @@ func try_attack():
 		_spawn_segment(body.get_child_count())
 		collider.eaten()
 
+
 # Halves the players segments during a split
+# NOTE: CURRENTLY UNUSED 
 func halve():
 	var halved_segments = ceil(current_segments / 2.0)
 	var segment_count = body.get_child_count()
@@ -153,6 +152,8 @@ func halve():
 	current_segments = halved_segments
 	print("Previous segments: " + str(segment_count) + "\n Current segments:" + str(current_segments))
 
+
+#spawn segment of body and position behind last 
 func _spawn_segment(i : int): 
 	var seg = BODY_SEGMENT_SCENE.instantiate()
 	body.add_child(seg) 
@@ -166,7 +167,9 @@ func _spawn_segment(i : int):
 		seg.position = last_segment.position - direc 
 	
 	print ("Spawned segment " + str(body.get_child_count()))
-		
+
+
+# move segment to a recursive position 
 func _move_segment(i : int, new_pos : Vector3, basis_dir : Vector3): 
 	if body.get_child_count() <= 0: return #base case 
 	
@@ -177,8 +180,25 @@ func _move_segment(i : int, new_pos : Vector3, basis_dir : Vector3):
 	var old_dir = segment.dir 
 	
 	segment.dir = basis_dir
+	segment.update_shapecast() 
 	segment.position = new_pos 
 	
 	#tail recursion 
 	if body.get_child_count() - (i+1) > 0: 
 		_move_segment(i+1, old_pos, old_dir)
+
+
+#check that any segments in the body are touching SOMETHING
+func _colliding_segments_downcast() -> bool: 
+	if body.get_child_count() == 0: return true 
+	
+	var segment_touching_ground : bool = false 
+	for segment in body.get_children():
+		if segment.shapecast.is_colliding():
+			for i in range(segment.shapecast.get_collision_count()):
+				var collider = segment.shapecast.get_collider(i)
+				
+				# Check if the collider is of a specific built-in type
+				if collider is GridMap:
+					segment_touching_ground = true 
+	return segment_touching_ground

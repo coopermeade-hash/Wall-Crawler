@@ -6,6 +6,7 @@ extends GridMap
 ##NOTE: The gridmap is set at 2x2x2 meter cells, so all player and tile movement will be a 2m increments unless we change it.
 
 @export var world_size = Vector3(32,32,32)
+@export var merge_chance = 0.5 
 
 #Made this an export in case we change the directory for the victim
 @export var victim_scene : PackedScene
@@ -22,7 +23,7 @@ var exits = []
 
 
 func _ready() -> void:
-	var world_gen = WorldGen.new(world_size.x, world_size.y, world_size.z, 0, 0.5)
+	var world_gen = WorldGen.new(world_size.x, world_size.y, world_size.z, 0, merge_chance)
 	var cells = world_gen.create_maze(1024, 32)
 	
 	#Get exits for each direction

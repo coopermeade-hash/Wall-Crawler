@@ -32,5 +32,6 @@ mesh_library = ExtResource("1_r7dep")
 script = ExtResource("2_empn1")
 merge_chance = 1.0
 victim_scene = ExtResource("3_uldf5")
+victim_chance = 0.33
 
 [node name="Player" parent="." unique_id=581983951 instance=ExtResource("4_ua64m")]

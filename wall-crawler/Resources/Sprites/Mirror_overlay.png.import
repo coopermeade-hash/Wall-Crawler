@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6qne81p2e08g"
-path="res://.godot/imported/dire_dog.png-859556f415a8592a624d8c3010c20f24.ctex"
+uid="uid://3owk0jjrdir7"
+path="res://.godot/imported/Mirror_overlay.png-598df9eaa91c008af43340bec6e568c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Sprites/dire_dog.png"
-dest_files=["res://.godot/imported/dire_dog.png-859556f415a8592a624d8c3010c20f24.ctex"]
+source_file="res://Resources/Sprites/Mirror_overlay.png"
+dest_files=["res://.godot/imported/Mirror_overlay.png-598df9eaa91c008af43340bec6e568c6.ctex"]
 
 [params]
 

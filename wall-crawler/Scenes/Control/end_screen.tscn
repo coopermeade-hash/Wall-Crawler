@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://w3bjlpjeadfm"]
+
+[ext_resource type="Script" uid="uid://cuufg5cnka5sg" path="res://Scenes/Control/end_screen.gd" id="1_4vtb7"]
+
+[node name="EndScreen" type="Control" unique_id=1765035357]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4vtb7")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1295962896]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="." unique_id=852211705]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 95.0
+offset_right = 348.0
+offset_bottom = 118.0
+text = "You dones it!"
+
+[node name="Button" type="Button" parent="." unique_id=1712042619]
+layout_mode = 0
+offset_left = 345.0
+offset_top = 236.0
+offset_right = 353.0
+offset_bottom = 244.0
+text = "Return to title screen"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

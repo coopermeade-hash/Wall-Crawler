@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ck4sse4mw0gc3" path="res://Scenes/Entity/victim.gd" id="1_bvq1e"]
 [ext_resource type="Material" uid="uid://3wpnaqnspnrh" path="res://Resources/Materials/victim_mat.tres" id="1_wt0wq"]
+[ext_resource type="PackedScene" uid="uid://brqv48rfjf6qx" path="res://Resources/Model/Victim.glb" id="3_oroiv"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
 material = ExtResource("1_wt0wq")
@@ -56,6 +57,7 @@ rings = 4
 script = ExtResource("1_bvq1e")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1992926711]
+visible = false
 mesh = SubResource("CapsuleMesh_g4v7s")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2087581101]
@@ -76,3 +78,6 @@ trail_enabled = true
 trail_lifetime = 0.2
 process_material = SubResource("ParticleProcessMaterial_yf5fn")
 draw_pass_1 = SubResource("CapsuleMesh_3gngh")
+
+[node name="Victim" parent="." unique_id=1738169378 instance=ExtResource("3_oroiv")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.4, 0.5)

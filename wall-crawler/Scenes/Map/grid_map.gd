@@ -94,11 +94,13 @@ func place_player():
 #Put victims randomly in the maze.
 func place_victims(dead_ends : Array ):
 	for dead_end in dead_ends:
+		dead_end += Vector3.ONE
 		if Vector3i(dead_end) == local_to_map(player.position): continue
 		
-		if get_cell_item(dead_end + Vector3.DOWN) == -1: continue
+		if get_cell_item(dead_end + Vector3.DOWN) == -1:
+			continue
 		
-		dead_end += Vector3.ONE
+		
 		#if a dead end is the center, skip, as that is where the player is.
 		var random_chance = randf()
 		#if there is a victim scene and we are below the victim chance.
